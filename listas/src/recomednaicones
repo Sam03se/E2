@@ -1,0 +1,6 @@
+Objetivo del caso	Qué modificar
+Aplicar IVA al 2.º producto	Usa un contador de inserciones, y en el segundo producto modifica el precio *= 1.12
+Validar que no se repita el ID	Antes de insertar, recorre lista.obtenerLista() y verifica si ya existe ese ID
+Buscar por nombre o precio	Crea otro case como en la búsqueda por ID, usando equalsIgnoreCase() o ==
+Crear una interfaz gráfica	Sustituir Scanner por componentes Swing y conectar con esta lógica
+Agregar filtros por precio o cantidad	Usa Stream o filtros condicionales en los ciclos

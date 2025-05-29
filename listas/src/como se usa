@@ -1,0 +1,125 @@
+/*
+===========================================================
+🧠 TIPOS DE BÚSQUEDA IMPLEMENTABLES EN SISTEMAS DE LISTAS
+===========================================================
+
+Este sistema permite utilizar distintas estrategias de búsqueda según el tipo de dato,
+la estructura utilizada y si la lista está ordenada o no. A continuación se describen:
+
+-----------------------------------------------------------
+1. BÚSQUEDA LINEAL (SECUENCIAL)
+-----------------------------------------------------------
+
+- Recorre toda la lista desde el inicio hasta encontrar la coincidencia.
+- Funciona con cualquier lista: simple, doble, circular, etc.
+- No requiere que la lista esté ordenada.
+
+✅ Ideal para:
+  - Buscar por ID, nombre o cualquier campo.
+  - Casos en los que no se conoce el orden o no se necesita optimizar.
+
+🔁 Ejemplo:
+int idBuscar = 102;
+for (Producto p : lista.obtenerLista()) {
+    if (p.getId() == idBuscar) {
+        System.out.println("Encontrado: " + p);
+        break;
+    }
+}
+
+-----------------------------------------------------------
+2. BÚSQUEDA BINARIA (DIVISIÓN Y CONQUISTA)
+-----------------------------------------------------------
+
+- Requiere que la lista esté ORDENADA por el mismo campo que se va a buscar.
+- Divide el rango de búsqueda en mitades sucesivas hasta encontrar el valor.
+
+✅ Ideal para:
+  - Búsqueda de ID cuando la lista está ordenada por ID.
+  - Escenarios que requieren mejor rendimiento.
+
+🔁 Ejemplo:
+List<Producto> productos = lista.obtenerLista();
+productos.sort(Comparadores.porId);  // Ordenar primero
+
+int idBuscar = 102;
+int izq = 0, der = productos.size() - 1;
+boolean encontrado = false;
+
+while (izq <= der) {
+    int mid = (izq + der) / 2;
+    Producto p = productos.get(mid);
+    if (p.getId() == idBuscar) {
+        System.out.println("Encontrado: " + p);
+        encontrado = true;
+        break;
+    } else if (p.getId() < idBuscar) {
+        izq = mid + 1;
+    } else {
+        der = mid - 1;
+    }
+}
+if (!encontrado) System.out.println("No encontrado");
+
+-----------------------------------------------------------
+3. BÚSQUEDA POR NOMBRE U OTRO CRITERIO (LINEAL PERSONALIZADA)
+-----------------------------------------------------------
+
+- Utiliza la misma lógica de la búsqueda lineal pero comparando por otro campo.
+- Ideal para búsquedas por texto o condiciones combinadas.
+
+🔁 Ejemplo por nombre exacto:
+String nombreBuscar = "Coca-Cola";
+for (Producto p : lista.obtenerLista()) {
+    if (p.getNombre().equalsIgnoreCase(nombreBuscar)) {
+        System.out.println("Encontrado: " + p);
+    }
+}
+
+🔁 Ejemplo por condición (ej. precio > 2 y cantidad < 10):
+for (Producto p : lista.obtenerLista()) {
+    if (p.getPrecio() > 2 && p.getCantidad() < 10) {
+        System.out.println("Cumple condición: " + p);
+    }
+}
+
+-----------------------------------------------------------
+🚀 DEMOSTRACIÓN CON DATOS DE EJEMPLO
+-----------------------------------------------------------
+
+Supongamos que se ingresaron los siguientes productos:
+
+ID: 101 | Nombre: Coca-Cola | Precio: 1.25 | Cantidad: 10
+ID: 102 | Nombre: Pepsi     | Precio: 1.10 | Cantidad: 15
+ID: 103 | Nombre: Sprite    | Precio: 1.00 | Cantidad: 8
+
+🟢 Búsqueda lineal por ID = 102:
+→ Resultado: Pepsi
+
+🟢 Búsqueda por nombre = \"Sprite\":
+→ Resultado: Sprite
+
+🟢 Búsqueda binaria por ID = 103 (tras ordenar por ID):
+→ Resultado: Sprite
+
+-----------------------------------------------------------
+⚠️ NOTA IMPORTANTE PARA IMPLEMENTACIÓN EN GUI (FormLista)
+-----------------------------------------------------------
+
+En un JButton para búsqueda, puedes usar esto:
+
+btnBuscar.addActionListener(e -> {
+    int idBuscar = Integer.parseInt(txtBuscarId.getText());
+    for (Producto p : listaActual.obtenerLista()) {
+        if (p.getId() == idBuscar) {
+            JOptionPane.showMessageDialog(this, "Encontrado: " + p);
+            return;
+        }
+    }
+    JOptionPane.showMessageDialog(this, "No encontrado.");
+});
+
+Puedes extender esta lógica para otros campos y condiciones si agregas más campos
+en el formulario o un ComboBox para seleccionar el tipo de búsqueda.
+
+*/
