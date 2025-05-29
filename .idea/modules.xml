@@ -6,6 +6,7 @@
       <module fileurl="file://$PROJECT_DIR$/RECUR/RECUR.iml" filepath="$PROJECT_DIR$/RECUR/RECUR.iml" />
       <module fileurl="file://$PROJECT_DIR$/SIM/SIM.iml" filepath="$PROJECT_DIR$/SIM/SIM.iml" />
       <module fileurl="file://$PROJECT_DIR$/busquedas/busquedas.iml" filepath="$PROJECT_DIR$/busquedas/busquedas.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sort/sort.iml" filepath="$PROJECT_DIR$/sort/sort.iml" />
     </modules>
   </component>
 </project>

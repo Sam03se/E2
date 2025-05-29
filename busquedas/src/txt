@@ -1,0 +1,78 @@
+/*
+🎯 FUNCIONALIDAD ADICIONAL: REGLAS PERSONALIZADAS SEGÚN CASOS (EXÁMENES, PROYECTOS)
+
+📁 ARCHIVO A MODIFICAR:
+→ FormularioBusqueda.java
+
+📍 LUGAR:
+→ Dentro de la clase FormularioBusqueda:
+   - Agregar el método `aplicarReglas(...)` fuera del constructor.
+   - Usarlo en el `btnAgregar.addActionListener`.
+
+🧠 OBJETIVO:
+Permitir que al agregar productos se apliquen modificaciones (IVA, aumentos, descuentos, etc.) según reglas variables.
+
+---
+
+1️⃣ MÉTODO PARA MANEJAR REGLAS DE NEGOCIO:
+
+private double aplicarReglas(int index, double precio, String nombre, int codigo) {
+    // 🧪 Cambiar estos casos según la consigna
+
+    // Ejemplo 1: Si es el segundo producto, agregar IVA del 12%
+    if (index == 1) {
+        precio *= 1.12;
+        areaResultados.append("🧾 Se aplicó IVA del 12% al segundo producto.\n");
+    }
+
+    // Ejemplo 2: Si es el tercer producto y contiene la palabra 'especial', sumar 0.10
+    if (index == 2 && nombre.toLowerCase().contains("especial")) {
+        precio += 0.10;
+        areaResultados.append("💰 Se sumaron $0.10 por ser un producto especial.\n");
+    }
+
+    // Ejemplo 3: Si el código es divisible por 3, aplicar descuento del 5%
+    if (codigo % 3 == 0) {
+        precio *= 0.95;
+        areaResultados.append("🎉 Código múltiplo de 3, descuento del 5% aplicado.\n");
+    }
+
+    // Ejemplo 4: Si contiene la palabra "promo" o "oferta", aplicar 10% de descuento
+    if (nombre.toLowerCase().contains("promo") || nombre.toLowerCase().contains("oferta")) {
+        precio *= 0.90;
+        areaResultados.append("🔖 Producto en promoción, 10% de descuento aplicado.\n");
+    }
+
+    return precio;
+}
+
+---
+
+2️⃣ IMPLEMENTACIÓN EN EL BOTÓN AGREGAR:
+
+🔁 Antes tenías:
+double precio = Double.parseDouble(txtPrecio.getText());
+
+✅ Ahora reemplázalo por:
+double precio = aplicarReglas(listaProductos.size(), Double.parseDouble(txtPrecio.getText()), nombre, codigo);
+
+---
+
+📌 EJEMPLO DE USO EN UN CASO EXÁMEN:
+
+Caso:
+“Cuando el producto tenga un nombre que incluya ‘oferta’ y sea el segundo producto, aumenta 0.50 y aplica IVA del 12%”.
+
+👩‍💻 Implementación:
+
+if (index == 1 && nombre.toLowerCase().contains("oferta")) {
+    precio = (precio + 0.50) * 1.12;
+    areaResultados.append("💡 Aumento de $0.50 + IVA por condición especial del segundo producto con 'oferta'.\n");
+}
+
+---
+
+✅ CONCLUSIÓN:
+Este método se adapta a cualquier regla que te indiquen. Solo debes personalizar los `if(...)` según el enunciado. Así no tienes que reescribir el flujo del programa, ¡solo las reglas de negocio!
+
+*/
